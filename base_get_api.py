@@ -2,8 +2,9 @@ import requests
 
 def make_get_request(url, authorization):
     headers = {
-        'Content-Type': 'text/plain',
-        'Authorization': authorization
+        "accept": "application/json",
+        "content-type": 'text/plain',
+        "authorization": authorization
     }
 
     response = requests.get(url, headers=headers)

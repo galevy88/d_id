@@ -11,7 +11,7 @@ secrets = get_secret(secret_name)
 source_url = secrets['freya_source_url']
 authorization = secrets['did_authorization']
 
-script_text = "Hi My name is Nimi and Im in love with Galchuk"
+script_text = "Hi, My name is Nimi and Im in love with Galchuk. By the way, Yariv is handsome too"
 
 id = make_post_request(script_text, source_url, authorization)
 
