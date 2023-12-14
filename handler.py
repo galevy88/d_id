@@ -1,11 +1,17 @@
 import time
+from aws_secrets import get_secret
 from base_post_api import make_post_request
 from base_get_api import make_get_request
 from download_video import download_video
 
-script_text = "Hi My name is Nimi"
-source_url = "https://create-images-results.d-id.com/google-oauth2%7C111069582955618623865/upl_Lkv76YmBADLqUYVEr0hgO/image.jpeg"
-authorization = "Basic xxx"
+### Secrets ###
+secret_name = "D-ID-D2efUj"
+secrets = get_secret(secret_name)
+
+source_url = secrets['freya_source_url']
+authorization = secrets['did_authorization']
+
+script_text = "Hi My name is Nimi and Im in love with Galchuk"
 
 id = make_post_request(script_text, source_url, authorization)
 
