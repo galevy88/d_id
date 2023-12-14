@@ -5,7 +5,7 @@ from base_get_api import make_get_request
 from download_video import download_video
 
 ### Secrets ###
-secret_name = "D-ID-D2efUj"
+secret_name = "D-ID"
 secrets = get_secret(secret_name)
 
 source_url = secrets['freya_source_url']
