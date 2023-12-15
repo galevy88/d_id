@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import os
 import time
 import shutil
+from aws_secrets import get_secret
 from encoding import encode_video_to_base64_response
 from base_post_api import make_post_request
 from base_get_api import make_get_request
@@ -24,9 +25,10 @@ def create_video_from_text():
     if not script_text:
         return jsonify({"error": "No text provided"}), 400
 
-    # Your existing code to create and download the video
-    source_url = "https://create-images-results.d-id.com/google-oauth2%7C111069582955618623865/upl_Lkv76YmBADLqUYVEr0hgO/image.jpeg"
-    authorization = "Basic bmltcm9kLnNhaGFyb2ZAZ21haWwuY29t:sFnfrdwPVo8YQmv0R5hNw"
+    secret_name = "D-ID"
+    secrets = get_secret(secret_name)
+    source_url = secrets['freya_source_url']
+    authorization = secrets['did_authorization']
     id = make_post_request(script_text, source_url, authorization)
 
     max_retries = 20
@@ -43,7 +45,7 @@ def create_video_from_text():
             print("Video URL not available yet, retrying after 3 seconds...")
             time.sleep(retry_interval)
     else:
-        return jsonify({"error": "Failed to retrieve video URL"}), 500
+        return jsonify({"base64_video": "error"}), 500
 
     video_file_name = f'{iat}/video.mp4'
     download_video(video_url, file_name=video_file_name)

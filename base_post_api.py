@@ -5,6 +5,7 @@ def make_post_request(script_text, source_url, authorization):
 
     payload = {
         "source_url": source_url,
+        "driver_url": "bank://subtle/driver-03",
         "script": {
             "type": "text",
             "input": script_text,
@@ -16,8 +17,9 @@ def make_post_request(script_text, source_url, authorization):
             "ssml": "false"
         },
         "config": {
-            "fluent": "false",
-            "pad_audio": "0.0"
+            "fluent": "true",
+            "pad_audio": 1,
+            "stitch": True
         }
     }
 
@@ -31,3 +33,6 @@ def make_post_request(script_text, source_url, authorization):
     response_json = response.json()
     id = response_json["id"]
     return id
+
+
+
