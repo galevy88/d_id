@@ -1,10 +1,10 @@
 import requests
 import base64
 msg = {
-    "text": "This Is message the called from the api bot - via visual studio code"
+    "s3_path": "https://free-truth-assets.s3.amazonaws.com/freya_voice/freya_silence.mp3"
 }
 def call_api_and_save_video():
-    url = "http://3.89.90.148:3006/upscale"
+    url = "http://3.89.90.148:3002/upscale"
     headers = {"Content-Type": "application/json"}
     data = msg
 
