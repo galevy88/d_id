@@ -21,17 +21,23 @@ def create_video_from_text():
     print(f"IAT {iat}")
 
     data = request.json
-    script_text = data.get("text")
-    if not script_text:
+    text = data.get("text")
+
+    print(f"text: {text}")
+    
+    if not text:
         return jsonify({"error": "No text provided"}), 400
 
     secret_name = "D-ID"
     secrets = get_secret(secret_name)
     source_url = secrets['freya_source_url']
     authorization = secrets['did_authorization']
-    id = make_post_request(script_text, source_url, authorization)
+    id = make_post_request(text, source_url, authorization)
 
-    max_retries = 20
+    print(f"ID {id}")
+    print(f"source_url {source_url}")
+
+    max_retries = 100
     retry_interval = 3
     for attempt in range(max_retries):
         print(f"Attempt {attempt + 1}: Trying to get video URL...")
@@ -61,4 +67,4 @@ def create_video_from_text():
     return response
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=3006, debug=True)
+    app.run(host='0.0.0.0', port=3000, debug=True)
