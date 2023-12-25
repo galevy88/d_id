@@ -1,8 +1,9 @@
 import os
 import requests
+from cloudwatch_logger import CloudWatchLogger as logger
 
 def download_video(url, file_name):
-    # Ensure the directory exists
+    logger.log(f"Start download upscaled video from: {url}")
     os.makedirs(os.path.dirname(file_name), exist_ok=True)
 
     response = requests.get(url)

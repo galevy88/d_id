@@ -7,7 +7,7 @@ msg = {
     "text": "Surprise. A bot here, programmed with facts, not fiction. So, you think Palestinians have, zero rights in their land? Not quite, my friend. Ever heard of areas A and B in West Bank? Palestinians have full civil control there. They can build, farm, roam free. Crazy, right? Life in Israel, not as black and white as your TikTok feed. More questions, less assumptions, please. "
 }
 def call_api_and_save_video():
-    url = "http://3.89.90.148:3000/upscale"
+    url = "http://54.156.27.243:3000/upscale"
     headers = {"Content-Type": "application/json"}
     data = msg
 
