@@ -13,6 +13,12 @@ from download_video import download_video
 import logging
 import warnings
 
+import argparse
+
+parser = argparse.ArgumentParser(description='Run FastAPI server.')
+parser.add_argument('--port', type=int, default=3000, help='Port to run the server on')
+args = parser.parse_args()
+
 warnings.filterwarnings("ignore")
 
 app = FastAPI()
@@ -80,4 +86,4 @@ def create_video_from_text(data: TextData):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=3000)
+    uvicorn.run(app, host="0.0.0.0", port=args.port)
