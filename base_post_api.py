@@ -1,9 +1,9 @@
 import requests
 from cloudwatch_logger import CloudWatchLogger as logger
 
-def make_post_request(script_text, source_url, authorization):
+def make_post_request(script_text, source_url, authorization, uid):
     url = "https://api.d-id.com/talks"
-    logger.log(f"script_text for the POST request is: {url}")
+    logger.log(f"script_text for the POST request is: {url}", uid=uid)
     payload = {
         "source_url": source_url,
         "driver_url": "bank://subtle/driver-03",
@@ -29,10 +29,10 @@ def make_post_request(script_text, source_url, authorization):
         "content-type": "application/json",
         "authorization": authorization
     }
-    logger.log(f"Sending POST request to: {url}")
-    response = requests.post(url, json=payload, headers=headers)
+    logger.log(f"Sending POST request to: {url}", uid=uid)
+    response = requests.post(url, json=payload, headers=headers, verify=False)
     response_json = response.json()
-    logger.log(f"Got response from POST request: {response_json}")
+    logger.log(f"Got response from POST request: {response_json}", uid=uid)
     id = response_json["id"]
     return id
 

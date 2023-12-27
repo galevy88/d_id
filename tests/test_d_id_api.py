@@ -1,18 +1,23 @@
 import requests
 import base64
-# msg = {
-#     "s3_path": "https://free-truth-assets.s3.amazonaws.com/freya_voice/freya_silence.mp3"
-# }
-msg = {
-    "text": "Surprise. A bot here, programmed with facts, not fiction. So, you think Palestinians have, zero rights in their land? Not quite, my friend. Ever heard of areas A and B in West Bank? Palestinians have full civil control there. They can build, farm, roam free. Crazy, right? Life in Israel, not as black and white as your TikTok feed. More questions, less assumptions, please. "
-}
+import uuid
+
+
 def call_api_and_save_video():
-    url = "http://54.156.27.243:3000/upscale"
+    url = "http://127.0.0.1:3000/upscale"
     headers = {"Content-Type": "application/json"}
-    data = msg
+
+    # Generate a unique identifier
+    uid = str(uuid.uuid4())
+
+    # Prepare the message with text and uid
+    msg = {
+        "text": "Surprise. A bot here, programmed with facts, not fiction. So, you think Palestinians have, zero rights in their land? Not quite, my friend. Ever heard of areas A and B in West Bank? Palestinians have full civil control there. They can build, farm, roam free. Crazy, right? Life in Israel, not as black and white as your TikTok feed. More questions, less assumptions, please.",
+        "uid": uid  # Include the uid in the message
+    }
 
     # Sending PUT request to the API
-    response = requests.put(url, json=data, headers=headers)
+    response = requests.put(url, json=msg, headers=headers, verify=False)
 
     if response.status_code == 200:
         # Extracting base64 encoded video data from response
@@ -29,6 +34,7 @@ def call_api_and_save_video():
             print("No video data found in response")
     else:
         print(f"Failed to get response from API. Status code: {response.status_code}")
+
 
 if __name__ == "__main__":
     call_api_and_save_video()
